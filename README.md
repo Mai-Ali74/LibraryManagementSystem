@@ -1,5 +1,4 @@
 # Library Management System (Console Application)
-
 A console-based Library Management System built with C#, Entity Framework Core, and SQL Server. The project demonstrates Entity Framework Core features, layered architecture using the Service Pattern, and database design best practices.
 
 ## 🌟 Key Features & Business Logic
@@ -10,21 +9,18 @@ A console-based Library Management System built with C#, Entity Framework Core, 
 
 ## 🛠️ Technologies
 - **Language:** C# (.NET 9)
-- **ORM:** Entity Framework Core 9 (Eager Loading with `.Include()`)
+- **ORM:** Entity Framework Core 9
 - **Database:** SQL Server
 - **Data Querying:** LINQ
 
 ## ⚙️ How to Run Locally
-
 1. **Clone the project:**
-   ```bash
-   git clone [https://github.com/Mai-Ali74/LibraryManagementSystem.git](https://github.com/Mai-Ali74/LibraryManagementSystem.git)
-Update Connection String:
-Update the connection string in ApplicationDbContext.cs to match your local SQL Server instance.
-
-Apply Database Migrations:
-Run the following command in the Package Manager Console inside Visual Studio:
-
-PowerShell
-Update-Database
-Run the application! 🚀
+```bash
+   git clone https://github.com/Mai-Ali74/LibraryManagementSystem.git
+```
+2. **Update the connection string** in `ApplicationDbContext.cs` to match your local SQL Server instance.
+3. **Apply database migrations** — run the following command in the Package Manager Console inside Visual Studio:
+```powershell
+   Update-Database
+```
+4. **Run the application!** 🚀
