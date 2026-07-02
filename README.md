@@ -1,116 +1,93 @@
-# 📚 Library Management System
+# Library Management System (LMS)
 
-A **C# console application** for managing a library's books, authors, categories, members, and loans — built with **Entity Framework Core** and **SQL Server** using a Code-First approach.
+A robust console-based **Library Management System** built using **C#**, **.NET**, and **Entity Framework Core (EF Core)** with **SQL Server**. The project follows a clean service-oriented architecture to handle data operations cleanly and safely through an interactive CLI menu.
 
-## ✨ Features
+---
 
-**Books**
-- Add, update, delete, and list all books
-- Search books by title
-- List available books (quantity > 0)
-- Filter books by category
+## 🚀 Features
 
-**Authors**
-- Add a new author
-- List all authors
+### 📚 Book Management
+* **Add Book:** Add new titles with specific release years and starting stock quantities.
+* **Update / Delete Book:** Full CRUD capabilities for updating or removing book listings.
+* **Search Book:** Quick search functions to find titles instantly.
 
-**Categories**
-- Add a new category
-- List all categories
+### 👤 Author Management
+* **Add Author:** Prompt inputs for Author Name and Country.
+* **List Authors:** View all registered authors with their system IDs and countries.
 
-**Members**
-- Add a new member
-- List all members
-- Delete a member (blocked automatically if the member has unreturned books)
+### 📁 Category Management
+* **Add Category:** Organize books by custom categories (e.g., Novel, Science).
+* **List Categories:** Display all available genres/categories.
 
-**Loans**
-- Borrow a book (decreases available quantity, fails if the book is unavailable)
-- Return a book (increases available quantity, prevents double-return)
-- List all loans (with return status)
-- List currently active (not yet returned) loans
+### 👥 Member Management
+* **Register Member:** Track library members using their full names and phone numbers.
+* **Safe Delete:** Members **cannot** be deleted if they currently hold active, unreturned book loans, preventing data discrepancy.
 
-## 🛠️ Built With
+### 💳 Loan & Borrowing System
+* **Borrow Book:** Allows members to borrow books. Automatically checks if the book exists and if it is currently in stock (`Quantity > 0`). Decreases stock by 1 upon success.
+* **Return Book:** Updates loan status with the return timestamp and replenishes book stock by 1. Prevents double-returning.
+* **View All Loans:** Displays comprehensive historical records of all loans (Book, Member, Borrow Date, and Return status).
 
-- **C#**
-- **.NET**
-- **Entity Framework Core** (Code-First + Migrations)
-- **SQL Server**
+---
 
-## 🗂️ Data Model
+## 💻 Console Interface Guide
 
-| Entity | Description | Relationships |
-|---|---|---|
-| `Book` | Title, publish year, quantity | Belongs to one `Author` and one `Category`; has many `Loan`s |
-| `Author` | Name, country | Has many `Book`s |
-| `Category` | Name | Has many `Book`s |
-| `Member` | Full name, phone | Has many `Loan`s |
-| `Loan` | Loan date, return date | Belongs to one `Book` and one `Member` |
+When you run the application, you will be greeted with an interactive console menu:
 
-The database is seeded on migration with sample authors, categories, books, and members for quick testing.
-
-## 📂 Project Structure
-LibraryManagementSystem/
-├── LibraryManagementSystem.sln
-├── Program.cs                  # Console menu & entry point
-├── Data/
-│   └── ApplicationDbContext.cs # EF Core DbContext, relationships, seed data
-├── Models/
-│   ├── Author.cs
-│   ├── Book.cs
-│   ├── Category.cs
-│   ├── Loan.cs
-│   └── Member.cs
-└── Services/
-├── BookService.cs
-├── AuthorService.cs
-├── CategoryService.cs
-├── MemberService.cs
-└── LoanService.cs
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- [.NET SDK](https://dotnet.microsoft.com/download)
-- SQL Server (LocalDB, Express, or full instance)
-- Visual Studio (recommended) or the `dotnet-ef` CLI tool
-
-### Setup
-
-1. Clone the repository
-```bash
-   git clone https://github.com/Mai-Ali74/LibraryManagementSystem.git
-```
-
-2. Update the connection string in `Data/ApplicationDbContext.cs` to match your own SQL Server instance:
-```csharp
-   options.UseSqlServer("Server=YOUR_SERVER; Database=LibraryDb; Trusted_Connection=True; TrustServerCertificate=True;");
-```
-
-3. Apply migrations to create the database (from the Package Manager Console or CLI):
-```bash
-   dotnet ef database update
-```
-
-4. Run the project:
-```bash
-   dotnet run
-```
-
-## 📖 Usage
-
-Once running, the app shows a menu in the console:
-============== Library System ==============
+```text
+============== Library System ============== 
 1 -> Books
 2 -> Authors
 3 -> Categories
 4 -> Members
 5 -> Loans
 0 -> Exit
+Choose: 
+🛠️ Tech Stack & Prerequisites
+Language: C# (.NET Core)
 
-Pick a number to enter a section, then choose the operation you want (add / update / delete / list / search, depending on the section) and follow the prompts.
+ORM: Entity Framework Core (EF Core)
 
-## 👤 Author
+Database: Microsoft SQL Server
 
-**Mai Ali**
-- GitHub: [@Mai-Ali74](https://github.com/Mai-Ali74)
+Dependencies:
+
+Microsoft.EntityFrameworkCore
+
+Microsoft.EntityFrameworkCore.SqlServer
+
+Microsoft.EntityFrameworkCore.Design
+
+🔧 Database Setup & Migration
+Update Connection String: Open Data/ApplicationDbContext.cs and ensure the connection string matches your local SQL Server instance:
+
+C#
+options.UseSqlServer("Server=MAI; Database=LibraryDb; Trusted_Connection=True; TrustServerCertificate=True;");
+Apply Migrations:
+Open the Package Manager Console in Visual Studio and run the following commands to initialize the database and seed records:
+
+Bash
+Add-Migration InitialCreate
+Update-Database
+📁 Project Structure
+Plaintext
+LibraryManagementSystem/
+│
+├── Data/
+│   └── ApplicationDbContext.cs    # EF Core DB Context & Data Seeding
+│
+├── Models/                        # Entity Models (Database Tables)
+│   ├── Author.cs
+│   ├── Book.cs
+│   ├── Category.cs
+│   ├── Loan.cs
+│   └── Member.cs
+│
+├── Services/                      # Business Logic & Console Handlers
+│   ├── AuthorService.cs
+│   ├── BookService.cs
+│   ├── CategoryService.cs
+│   ├── LoanService.cs
+│   └── MemberService.cs
+│
+└── Program.cs                     # Application Entry Point & Core UI Switch
