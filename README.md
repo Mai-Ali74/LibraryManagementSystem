@@ -3,6 +3,7 @@ A console-based Library Management System built with C#, Entity Framework Core, 
 
 ## 🌟 Key Features & Business Logic
 - **Book Management:** Add, Update, Delete, Search, and filter books by Category.
+- **Reference Data Management:** Add and list Authors and Categories to organize the book catalog.
 - **Member Tracking:** Register new members and safely handle member deletion (checks for unreturned books first).
 - **Loan Operations:** Borrow books (automatically reduces stock quantity) and handle book returns (restores stock quantity).
 - **Database Architecture:** Structured relationships configured via Fluent API with initial data seeding for testing.
